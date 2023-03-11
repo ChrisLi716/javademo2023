@@ -1,0 +1,7 @@
+A functional interface is an interface that contains one and only one abstract method.
+
+Lambda expressions introduce the new arrow operator -> into Java. It divides the lambda expressions in two parts:
+(n) -> n*n
+The left side specifies the parameters required by the expression, which could also be empty if no parameters are required.
+The right side is the lambda body which specifies the actions of the lambda expression;
+It might be helpful to think about this operator as “becomes”. For example, “n becomes n*n”, or “n becomes n squared”.
