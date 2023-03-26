@@ -14,14 +14,18 @@ public class SleepTest {
 
     public static void main(String[] args) throws IOException {
         SleepTest test = new SleepTest();
-        MyThread thread1 = test.new MyThread();
-        MyThread thread2 = test.new MyThread();
+        MyThread thread1 = test.new MyThread("chris-thread-1");
+        MyThread thread2 = test.new MyThread("chris-thread-2");
         thread1.start();
         thread2.start();
     }
 
 
     class MyThread extends Thread {
+        public MyThread(String name) {
+            super(name);
+        }
+
         @Override
         public void run() {
             synchronized (object) {

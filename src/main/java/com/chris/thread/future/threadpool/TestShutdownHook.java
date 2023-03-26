@@ -39,9 +39,9 @@ public class TestShutdownHook {
                 count.getAndIncrement();
                 //干了10次退出
                 System.out.println("doing job " + count);
-                if (count.get() == 10) {
+               /* if (count.get() == 100) {
                     System.exit(0);
-                }
+                }*/
             }
         }, 0, 2 * 1000);
 

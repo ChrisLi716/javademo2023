@@ -57,6 +57,7 @@ public class ScheduledThreadTest {
         ScheduledFuture<?> scheduledFuture = scheduledExecutorService.scheduleAtFixedRate(() ->
                 System.out.println("schedule at fixed rate"), 5, 1, TimeUnit.SECONDS);
 
+        scheduledFuture.getDelay(TimeUnit.SECONDS);
         System.out.println("result:" + scheduledFuture.get());
         scheduledExecutorService.shutdown();
     }
@@ -73,6 +74,20 @@ public class ScheduledThreadTest {
 
         System.out.println("result:" + scheduledFuture.get());
         scheduledExecutorService.shutdown();
+    }
+
+
+    @Test
+    public void testboth() throws InterruptedException, ExecutionException {
+        ScheduledFuture<?> scheduledFuture1 = Executors.newScheduledThreadPool(2).scheduleAtFixedRate(() ->
+                System.out.println("schedule at fixed rate"), 2, 1, TimeUnit.SECONDS);
+
+
+        ScheduledFuture<?> scheduledFuture2 = scheduledExecutorService.scheduleWithFixedDelay(() ->
+                System.out.println("schedule with fixed rate"), 5, 3, TimeUnit.SECONDS);
+
+        scheduledFuture1.get();
+        scheduledFuture2.get();
     }
 
 }
