@@ -16,10 +16,10 @@ public class StreamCreator {
      */
     public void createStreamByCollection() {
         List<Employee> employees = TestData.getEmployees();
-        //返回一个顺序流
+        // 返回一个顺序流
         Stream<Employee> stream = employees.stream();
 
-        //返回一个并行流
+        // 返回一个并行流
         Stream<Employee> parallelStream = employees.parallelStream();
     }
 
@@ -59,7 +59,7 @@ public class StreamCreator {
 
         /*
          生成
-         创建并遍历前10个偶数
+         创建并遍历前10个数
          */
         Stream.generate(Math::random).limit(10).forEach(System.out::println);
     }
