@@ -87,6 +87,8 @@ public class MapDemo2 {
 
         //{A=3, B=1, C=2, E=5}
         System.out.println(wordCountMap);
+
+
     }
 
 
