@@ -1,9 +1,14 @@
 package com.chris.demo.collection.map;
 
+import cn.hutool.core.lang.hash.Hash;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import java.util.BitSet;
+import java.util.HashMap;
+import java.util.Map;
 
+@Slf4j
 public class BitSetTest {
 
     @Test
@@ -36,6 +41,35 @@ public class BitSetTest {
         set_1_tmp.or(set_2);
         System.out.println("set_1_tmp:" + set_1_tmp);
 
+
+    }
+
+
+    @Test
+    public void test02() {
+        BitSet bitSet = new BitSet(2);
+        int size = bitSet.size();
+        int length = bitSet.length();
+        // size:64, length:0
+        log.info("size:{}, length:{}", size, length);
+
+    }
+
+    /**
+     * 将所有手机号存存来，方便
+     */
+    @Test
+    public void test03() {
+        // 136 22314539
+        Map<Integer, BitSet> map = new HashMap<>();
+        // 因为BitSet只能存储int值最大为2,147,483,648，所以要根据号段分桶
+        map.computeIfAbsent(136, k -> new BitSet()).set(22314539);
+
+        BitSet bitSet = map.get(136);
+        int length = bitSet.length();
+        int size = bitSet.size();
+        // length:22314540, size:22314560
+        log.info("length:{}, size:{}", length, size);
 
     }
 }

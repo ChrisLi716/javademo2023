@@ -12,6 +12,15 @@ import java.util.stream.Collectors;
 /**
  * @author Chris
  * @date 2022-09-04 10:36 AM
+ * <p>
+ * compute（计算)
+ * <p>
+ * computeIfAbsent(不存在时计算)
+ * <p>
+ * computeIfPresent(存在时计算)
+ * <p>
+ * 相同：返回值是返回最新的值
+ * 不相同：compute是有则覆盖，没则添加;computeIfAbsent是有则不操作，没则添加;computeIfPresent是有则覆盖，没值的时候不操作
  */
 public class MapDemo2 {
 
@@ -78,11 +87,11 @@ public class MapDemo2 {
 
         // the word appear times
         Map<String, Integer> wordCountMap = new HashMap<>();
-        words.forEach(word -> wordCountMap.compute(word, (key, oldCount) -> {
-            if (Objects.isNull(oldCount)) {
+        words.forEach(word -> wordCountMap.compute(word, (key, count) -> {
+            if (Objects.isNull(count)) {
                 return 1;
             }
-            return oldCount + 1;
+            return count + 1;
         }));
 
         //{A=3, B=1, C=2, E=5}
