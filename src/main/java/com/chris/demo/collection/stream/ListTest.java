@@ -1,13 +1,11 @@
 package com.chris.demo.collection.stream;
 
-import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.collection.CollUtil;
+import org.junit.Before;
 import org.junit.Test;
-import org.springframework.util.CollectionUtils;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ListTest {
 
@@ -30,6 +28,52 @@ public class ListTest {
 
         intArray[1] = 3;
         System.out.println(statusList);
+    }
+
+
+    private List<Integer> userList = CollUtil.newArrayList();
+
+    @Before
+    public void buildList() {
+        System.out.println("begin build userList");
+        Random rand = new Random();
+        for (int i = 0; i < 10000; i++) {
+            userList.add(rand.nextInt(1000));
+        }
+    }
+
+    /**
+     * stream.sort耗时：34ms
+     * List.sort耗时：5ms
+     */
+    @Test
+    public void testPerformance() {
+        List<Integer> userList2 = new ArrayList<>(userList);
+
+        long startTime1 = System.currentTimeMillis();
+        userList2.stream().sorted(Comparator.comparing(Integer::intValue)).collect(Collectors.toList());
+        System.out.println("stream.sort耗时：" + (System.currentTimeMillis() - startTime1) + "ms");
+
+        long startTime = System.currentTimeMillis();
+        userList.sort(Comparator.comparing(Integer::intValue));
+        System.out.println("List.sort耗时：" + (System.currentTimeMillis() - startTime) + "ms");
+    }
+
+    /**
+     * List.sort()耗时：31ms
+     * stream.sort耗时：8ms
+     */
+    @Test
+    public void testPerformance2() {
+        List<Integer> userList2 = new ArrayList<>(userList);
+
+        long startTime = System.currentTimeMillis();
+        userList.sort(Comparator.comparing(Integer::intValue));
+        System.out.println("List.sort()耗时：" + (System.currentTimeMillis() - startTime) + "ms");
+
+        long startTime1 = System.currentTimeMillis();
+        userList2.stream().sorted(Comparator.comparing(Integer::intValue)).collect(Collectors.toList());
+        System.out.println("stream.sort耗时：" + (System.currentTimeMillis() - startTime1) + "ms");
     }
 
 
