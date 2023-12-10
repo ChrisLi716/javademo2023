@@ -31,7 +31,7 @@ public class ListTest {
     }
 
 
-    private List<Integer> userList = CollUtil.newArrayList();
+    private final List<Integer> userList = CollUtil.newArrayList();
 
     @Before
     public void buildList() {

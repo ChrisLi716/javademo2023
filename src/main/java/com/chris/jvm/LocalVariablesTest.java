@@ -1,5 +1,7 @@
 package com.chris.jvm;
 
+import org.junit.Test;
+
 import java.util.Date;
 
 public class LocalVariablesTest {
@@ -25,5 +27,18 @@ public class LocalVariablesTest {
         char gender = 'M';
         return date + name;
     }
+
+
+    @Test
+    public void test4() {
+        int a = 0;
+        {
+            int b = 0;
+            b = a + 1;
+        }
+        // 变量c是使用前面已经销毁的变量b所占据的slot的位置
+        int c = a + 1;
+    }
+
 
 }
