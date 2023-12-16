@@ -7,7 +7,7 @@ public class GatewayDaoImpl implements GatewayDao {
     /**
      * 初始化，将枚举中配置的handler初始化到map中，方便获取
      */
-    private static Map<Integer, GatewayEntity> gatewayEntityMap = new HashMap<>();
+    private static final Map<Integer, GatewayEntity> gatewayEntityMap = new HashMap<>();
 
     static {
         GatewayEnum[] values = GatewayEnum.values();

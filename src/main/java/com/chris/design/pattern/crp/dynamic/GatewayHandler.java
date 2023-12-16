@@ -1,7 +1,5 @@
 package com.chris.design.pattern.crp.dynamic;
 
-import lombok.Data;
-
 public abstract class GatewayHandler {
 
     protected GatewayHandler next;

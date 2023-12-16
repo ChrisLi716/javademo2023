@@ -1,7 +1,5 @@
 package com.chris.design.pattern.crp.dynamic;
 
-import com.chris.design.pattern.crp.dynamic.GatewayEntity;
-
 public interface GatewayDao {
     /**
      * 根据 handlerId 获取配置项

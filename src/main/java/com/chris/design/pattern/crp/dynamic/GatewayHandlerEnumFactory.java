@@ -13,16 +13,17 @@ public class GatewayHandlerEnumFactory {
             return null;
         }
 
-        GatewayEntity tempGatewayEntity = firstGatewayEntity;
+        GatewayEntity tmpGatewayEntity = firstGatewayEntity;
         Integer nextHandlerId = null;
-        GatewayHandler tempGatewayHandler = firstGatewayHandler;
+        GatewayHandler tmpGatewayHandler = firstGatewayHandler;
         // 迭代遍历所有handler，以及将它们链接起来
-        while ((nextHandlerId = tempGatewayEntity.getNextHandlerId()) != null) {
+        while ((nextHandlerId = tmpGatewayEntity.getNextHandlerId()) != null) {
             GatewayEntity gatewayEntity = gatewayDao.getGatewayEntity(nextHandlerId);
             GatewayHandler gatewayHandler = newGatewayHandler(gatewayEntity);
-            tempGatewayHandler.setNext(gatewayHandler);
-            tempGatewayHandler = gatewayHandler;
-            tempGatewayEntity = gatewayEntity;
+            assert tmpGatewayHandler != null;
+            tmpGatewayHandler.setNext(gatewayHandler);
+            tmpGatewayHandler = gatewayHandler;
+            tmpGatewayEntity = gatewayEntity;
         }
         // 返回第一个handler
         return firstGatewayHandler;
@@ -31,12 +32,12 @@ public class GatewayHandlerEnumFactory {
     /**
      * 反射实体化具体的处理者
      *
-     * @param firstGatewayEntity
-     * @return
+     * @param gatewayEntity GatewayEntity
+     * @return GatewayHandler
      */
-    private static GatewayHandler newGatewayHandler(GatewayEntity firstGatewayEntity) {
+    private static GatewayHandler newGatewayHandler(GatewayEntity gatewayEntity) {
         // 获取全限定类名
-        String className = firstGatewayEntity.getConference();
+        String className = gatewayEntity.getConference();
         try {
             // 根据全限定类名，加载并初始化该类，即会初始化该类的静态段
             Class<?> clazz = Class.forName(className);
