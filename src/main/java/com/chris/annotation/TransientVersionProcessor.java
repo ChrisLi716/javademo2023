@@ -19,6 +19,8 @@ import java.util.Set;
 /**
  * {@link AbstractProcessor} 就属于 Pluggable Annotation Processing API
  * <a href="https://blog.csdn.net/dap769815768/article/details/90448451"/>
+ * <a href="https://blog.csdn.net/wyanyi/article/details/125686058"/>
+ * <a href="https://blog.csdn.net/weixin_37598243/article/details/128356697"/>
  */
 @AutoService(Processor.class)
 public class TransientVersionProcessor extends AbstractProcessor {
